@@ -22,20 +22,20 @@ func (e OrderStatusEnum) ToPointer() *OrderStatusEnum {
 }
 
 func (e *OrderStatusEnum) UnmarshalJSON(data []byte) error {
-	var s string
-	if err := json.Unmarshal(data, &s); err != nil {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
-	switch s {
+	switch v {
 	case "placed":
 		fallthrough
 	case "approved":
 		fallthrough
 	case "delivered":
-		*e = OrderStatusEnum(s)
+		*e = OrderStatusEnum(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for OrderStatusEnum: %s", s)
+		return fmt.Errorf("invalid value for OrderStatusEnum: %v", v)
 	}
 }
 

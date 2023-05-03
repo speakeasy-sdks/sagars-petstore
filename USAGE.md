@@ -13,8 +13,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := shared.Pet{
+    ctx := context.Background()
+    res, err := s.Pet.AddPetForm(ctx, shared.Pet{
         Category: &shared.Category{
             ID: sdk.Int64(1),
             Name: sdk.String("Dogs"),
@@ -45,9 +45,7 @@ func main() {
                 Name: sdk.String("Mrs. Sophie Smith MD"),
             },
         },
-    }
-
-    res, err := s.Pet.AddPetForm(ctx, req, operations.AddPetFormSecurity{
+    }, operations.AddPetFormSecurity{
         PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
     })
     if err != nil {

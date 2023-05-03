@@ -37,8 +37,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := shared.User{
+    ctx := context.Background()
+    res, err := s.User.CreateUserForm(ctx, shared.User{
         Email: sdk.String("john@email.com"),
         FirstName: sdk.String("John"),
         ID: sdk.Int64(10),
@@ -47,9 +47,7 @@ func main() {
         Phone: sdk.String("12345"),
         UserStatus: sdk.Int(1),
         Username: sdk.String("theUser"),
-    }
-
-    res, err := s.User.CreateUserForm(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -79,8 +77,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := shared.User{
+    ctx := context.Background()
+    res, err := s.User.CreateUserJSON(ctx, shared.User{
         Email: sdk.String("john@email.com"),
         FirstName: sdk.String("John"),
         ID: sdk.Int64(10),
@@ -89,9 +87,7 @@ func main() {
         Phone: sdk.String("12345"),
         UserStatus: sdk.Int(1),
         Username: sdk.String("theUser"),
-    }
-
-    res, err := s.User.CreateUserJSON(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -121,10 +117,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := []byte("quasi")
-
-    res, err := s.User.CreateUserRaw(ctx, req)
+    ctx := context.Background()
+    res, err := s.User.CreateUserRaw(ctx, []byte("quasi"))
     if err != nil {
         log.Fatal(err)
     }
@@ -154,8 +148,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := []shared.User{
+    ctx := context.Background()
+    res, err := s.User.CreateUsersWithListInput(ctx, []shared.User{
         shared.User{
             Email: sdk.String("john@email.com"),
             FirstName: sdk.String("John"),
@@ -196,9 +190,7 @@ func main() {
             UserStatus: sdk.Int(1),
             Username: sdk.String("theUser"),
         },
-    }
-
-    res, err := s.User.CreateUsersWithListInput(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -228,12 +220,10 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.DeleteUserRequest{
+    ctx := context.Background()
+    res, err := s.User.DeleteUser(ctx, operations.DeleteUserRequest{
         Username: "Weston_Thiel",
-    }
-
-    res, err := s.User.DeleteUser(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -263,12 +253,10 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.GetUserByNameRequest{
+    ctx := context.Background()
+    res, err := s.User.GetUserByName(ctx, operations.GetUserByNameRequest{
         Username: "Whitney.Bednar",
-    }
-
-    res, err := s.User.GetUserByName(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -298,13 +286,11 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.LoginUserRequest{
+    ctx := context.Background()
+    res, err := s.User.LoginUser(ctx, operations.LoginUserRequest{
         Password: sdk.String("cum"),
         Username: sdk.String("Aiyana.Batz"),
-    }
-
-    res, err := s.User.LoginUser(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -365,8 +351,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.UpdateUserFormRequest{
+    ctx := context.Background()
+    res, err := s.User.UpdateUserForm(ctx, operations.UpdateUserFormRequest{
         User: &shared.User{
             Email: sdk.String("john@email.com"),
             FirstName: sdk.String("John"),
@@ -378,9 +364,7 @@ func main() {
             Username: sdk.String("theUser"),
         },
         Username: "Wilfrid.Carter",
-    }
-
-    res, err := s.User.UpdateUserForm(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -411,8 +395,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.UpdateUserJSONRequest{
+    ctx := context.Background()
+    res, err := s.User.UpdateUserJSON(ctx, operations.UpdateUserJSONRequest{
         User: &shared.User{
             Email: sdk.String("john@email.com"),
             FirstName: sdk.String("John"),
@@ -424,9 +408,7 @@ func main() {
             Username: sdk.String("theUser"),
         },
         Username: "Jayden.Carter88",
-    }
-
-    res, err := s.User.UpdateUserJSON(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -457,13 +439,11 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.UpdateUserRawRequest{
+    ctx := context.Background()
+    res, err := s.User.UpdateUserRaw(ctx, operations.UpdateUserRawRequest{
         RequestBody: []byte("commodi"),
         Username: "Terrill69",
-    }
-
-    res, err := s.User.UpdateUserRaw(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }

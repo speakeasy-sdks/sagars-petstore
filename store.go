@@ -37,6 +37,7 @@ func newStore(defaultClient, securityClient HTTPClient, serverURL, language, sdk
 
 // DeleteOrder - Delete purchase order by ID
 // For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
+
 func (s *store) DeleteOrder(ctx context.Context, request operations.DeleteOrderRequest) (*operations.DeleteOrderResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/store/order/{orderId}", request, nil)
@@ -78,6 +79,7 @@ func (s *store) DeleteOrder(ctx context.Context, request operations.DeleteOrderR
 
 // GetInventory - Returns pet inventories by status
 // Returns a map of status codes to quantities
+
 func (s *store) GetInventory(ctx context.Context) (*operations.GetInventoryResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/store/inventory"
@@ -123,6 +125,7 @@ func (s *store) GetInventory(ctx context.Context) (*operations.GetInventoryRespo
 
 // GetOrderByID - Find purchase order by ID
 // For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions.
+
 func (s *store) GetOrderByID(ctx context.Context, request operations.GetOrderByIDRequest) (*operations.GetOrderByIDResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/store/order/{orderId}", request, nil)
@@ -181,6 +184,7 @@ func (s *store) GetOrderByID(ctx context.Context, request operations.GetOrderByI
 
 // PlaceOrderForm - Place an order for a pet
 // Place a new order in the store
+
 func (s *store) PlaceOrderForm(ctx context.Context, request shared.Order) (*operations.PlaceOrderFormResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/store/order"
@@ -234,6 +238,7 @@ func (s *store) PlaceOrderForm(ctx context.Context, request shared.Order) (*oper
 
 // PlaceOrderJSON - Place an order for a pet
 // Place a new order in the store
+
 func (s *store) PlaceOrderJSON(ctx context.Context, request shared.Order) (*operations.PlaceOrderJSONResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/store/order"
@@ -287,6 +292,7 @@ func (s *store) PlaceOrderJSON(ctx context.Context, request shared.Order) (*oper
 
 // PlaceOrderRaw - Place an order for a pet
 // Place a new order in the store
+
 func (s *store) PlaceOrderRaw(ctx context.Context, request []byte) (*operations.PlaceOrderRawResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/store/order"

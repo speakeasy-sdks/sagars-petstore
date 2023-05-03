@@ -41,8 +41,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := shared.Pet{
+    ctx := context.Background()
+    res, err := s.Pet.AddPetForm(ctx, shared.Pet{
         Category: &shared.Category{
             ID: sdk.Int64(1),
             Name: sdk.String("Dogs"),
@@ -71,9 +71,7 @@ func main() {
                 Name: sdk.String("Everett Breitenberg"),
             },
         },
-    }
-
-    res, err := s.Pet.AddPetForm(ctx, req, operations.AddPetFormSecurity{
+    }, operations.AddPetFormSecurity{
         PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
     })
     if err != nil {
@@ -106,8 +104,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := shared.Pet{
+    ctx := context.Background()
+    res, err := s.Pet.AddPetJSON(ctx, shared.Pet{
         Category: &shared.Category{
             ID: sdk.Int64(1),
             Name: sdk.String("Dogs"),
@@ -129,9 +127,7 @@ func main() {
                 Name: sdk.String("Curtis Morissette"),
             },
         },
-    }
-
-    res, err := s.Pet.AddPetJSON(ctx, req, operations.AddPetJSONSecurity{
+    }, operations.AddPetJSONSecurity{
         PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
     })
     if err != nil {
@@ -164,10 +160,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := []byte("saepe")
-
-    res, err := s.Pet.AddPetRaw(ctx, req, operations.AddPetRawSecurity{
+    ctx := context.Background()
+    res, err := s.Pet.AddPetRaw(ctx, []byte("saepe"), operations.AddPetRawSecurity{
         PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
     })
     if err != nil {
@@ -199,13 +193,11 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.DeletePetRequest{
+    ctx := context.Background()
+    res, err := s.Pet.DeletePet(ctx, operations.DeletePetRequest{
         APIKey: sdk.String("fuga"),
         PetID: 449950,
-    }
-
-    res, err := s.Pet.DeletePet(ctx, req, operations.DeletePetSecurity{
+    }, operations.DeletePetSecurity{
         PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
     })
     if err != nil {
@@ -237,12 +229,10 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.FindPetsByStatusRequest{
+    ctx := context.Background()
+    res, err := s.Pet.FindPetsByStatus(ctx, operations.FindPetsByStatusRequest{
         Status: operations.FindPetsByStatusStatusEnumPending.ToPointer(),
-    }
-
-    res, err := s.Pet.FindPetsByStatus(ctx, req, operations.FindPetsByStatusSecurity{
+    }, operations.FindPetsByStatusSecurity{
         PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
     })
     if err != nil {
@@ -274,16 +264,14 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.FindPetsByTagsRequest{
+    ctx := context.Background()
+    res, err := s.Pet.FindPetsByTags(ctx, operations.FindPetsByTagsRequest{
         Tags: []string{
             "iure",
             "saepe",
             "quidem",
         },
-    }
-
-    res, err := s.Pet.FindPetsByTags(ctx, req, operations.FindPetsByTagsSecurity{
+    }, operations.FindPetsByTagsSecurity{
         PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
     })
     if err != nil {
@@ -315,12 +303,10 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.GetPetByIDRequest{
+    ctx := context.Background()
+    res, err := s.Pet.GetPetByID(ctx, operations.GetPetByIDRequest{
         PetID: 99280,
-    }
-
-    res, err := s.Pet.GetPetByID(ctx, req, operations.GetPetByIDSecurity{
+    }, operations.GetPetByIDSecurity{
         APIKey: sdk.String("YOUR_API_KEY_HERE"),
     })
     if err != nil {
@@ -352,14 +338,12 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.UpdatePetWithFormRequest{
+    ctx := context.Background()
+    res, err := s.Pet.UpdatePetWithForm(ctx, operations.UpdatePetWithFormRequest{
         Name: sdk.String("Lela Orn"),
         PetID: 170909,
         Status: sdk.String("dolorem"),
-    }
-
-    res, err := s.Pet.UpdatePetWithForm(ctx, req, operations.UpdatePetWithFormSecurity{
+    }, operations.UpdatePetWithFormSecurity{
         PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
     })
     if err != nil {
@@ -392,8 +376,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := shared.Pet{
+    ctx := context.Background()
+    res, err := s.Pet.UpdatePetForm(ctx, shared.Pet{
         Category: &shared.Category{
             ID: sdk.Int64(1),
             Name: sdk.String("Dogs"),
@@ -419,9 +403,7 @@ func main() {
                 Name: sdk.String("Shaun McCullough"),
             },
         },
-    }
-
-    res, err := s.Pet.UpdatePetForm(ctx, req, operations.UpdatePetFormSecurity{
+    }, operations.UpdatePetFormSecurity{
         PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
     })
     if err != nil {
@@ -454,8 +436,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := shared.Pet{
+    ctx := context.Background()
+    res, err := s.Pet.UpdatePetJSON(ctx, shared.Pet{
         Category: &shared.Category{
             ID: sdk.Int64(1),
             Name: sdk.String("Dogs"),
@@ -473,9 +455,7 @@ func main() {
                 Name: sdk.String("Kayla O'Kon"),
             },
         },
-    }
-
-    res, err := s.Pet.UpdatePetJSON(ctx, req, operations.UpdatePetJSONSecurity{
+    }, operations.UpdatePetJSONSecurity{
         PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
     })
     if err != nil {
@@ -508,10 +488,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := []byte("quo")
-
-    res, err := s.Pet.UpdatePetRaw(ctx, req, operations.UpdatePetRawSecurity{
+    ctx := context.Background()
+    res, err := s.Pet.UpdatePetRaw(ctx, []byte("quo"), operations.UpdatePetRawSecurity{
         PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
     })
     if err != nil {
@@ -543,14 +521,12 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.UploadFileRequest{
+    ctx := context.Background()
+    res, err := s.Pet.UploadFile(ctx, operations.UploadFileRequest{
         RequestBody: []byte("sequi"),
         AdditionalMetadata: sdk.String("tenetur"),
         PetID: 368725,
-    }
-
-    res, err := s.Pet.UploadFile(ctx, req, operations.UploadFileSecurity{
+    }, operations.UploadFileSecurity{
         PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
     })
     if err != nil {

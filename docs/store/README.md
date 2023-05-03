@@ -34,12 +34,10 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.DeleteOrderRequest{
+    ctx := context.Background()
+    res, err := s.Store.DeleteOrder(ctx, operations.DeleteOrderRequest{
         OrderID: 662527,
-    }
-
-    res, err := s.Store.DeleteOrder(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -99,12 +97,10 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := operations.GetOrderByIDRequest{
+    ctx := context.Background()
+    res, err := s.Store.GetOrderByID(ctx, operations.GetOrderByIDRequest{
         OrderID: 820994,
-    }
-
-    res, err := s.Store.GetOrderByID(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -135,17 +131,15 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := shared.Order{
+    ctx := context.Background()
+    res, err := s.Store.PlaceOrderForm(ctx, shared.Order{
         Complete: sdk.Bool(false),
         ID: sdk.Int64(10),
         PetID: sdk.Int64(198772),
         Quantity: sdk.Int(7),
         ShipDate: types.MustTimeFromString("2022-11-26T13:23:33.410Z"),
         Status: shared.OrderStatusEnumApproved.ToPointer(),
-    }
-
-    res, err := s.Store.PlaceOrderForm(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -176,17 +170,15 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := shared.Order{
+    ctx := context.Background()
+    res, err := s.Store.PlaceOrderJSON(ctx, shared.Order{
         Complete: sdk.Bool(false),
         ID: sdk.Int64(10),
         PetID: sdk.Int64(198772),
         Quantity: sdk.Int(7),
         ShipDate: types.MustTimeFromString("2021-04-29T07:12:18.684Z"),
         Status: shared.OrderStatusEnumApproved.ToPointer(),
-    }
-
-    res, err := s.Store.PlaceOrderJSON(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -217,10 +209,8 @@ import(
 func main() {
     s := sdk.New()
 
-    ctx := context.Background()    
-    req := []byte("laborum")
-
-    res, err := s.Store.PlaceOrderRaw(ctx, req)
+    ctx := context.Background()
+    res, err := s.Store.PlaceOrderRaw(ctx, []byte("laborum"))
     if err != nil {
         log.Fatal(err)
     }

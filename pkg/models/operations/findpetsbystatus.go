@@ -27,20 +27,20 @@ func (e FindPetsByStatusStatusEnum) ToPointer() *FindPetsByStatusStatusEnum {
 }
 
 func (e *FindPetsByStatusStatusEnum) UnmarshalJSON(data []byte) error {
-	var s string
-	if err := json.Unmarshal(data, &s); err != nil {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
-	switch s {
+	switch v {
 	case "available":
 		fallthrough
 	case "pending":
 		fallthrough
 	case "sold":
-		*e = FindPetsByStatusStatusEnum(s)
+		*e = FindPetsByStatusStatusEnum(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for FindPetsByStatusStatusEnum: %s", s)
+		return fmt.Errorf("invalid value for FindPetsByStatusStatusEnum: %v", v)
 	}
 }
 

@@ -36,6 +36,7 @@ func newUser(defaultClient, securityClient HTTPClient, serverURL, language, sdkV
 
 // CreateUserForm - Create user
 // This can only be done by the logged in user.
+
 func (s *user) CreateUserForm(ctx context.Context, request shared.User) (*operations.CreateUserFormResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/user"
@@ -95,6 +96,7 @@ func (s *user) CreateUserForm(ctx context.Context, request shared.User) (*operat
 
 // CreateUserJSON - Create user
 // This can only be done by the logged in user.
+
 func (s *user) CreateUserJSON(ctx context.Context, request shared.User) (*operations.CreateUserJSONResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/user"
@@ -154,6 +156,7 @@ func (s *user) CreateUserJSON(ctx context.Context, request shared.User) (*operat
 
 // CreateUserRaw - Create user
 // This can only be done by the logged in user.
+
 func (s *user) CreateUserRaw(ctx context.Context, request []byte) (*operations.CreateUserRawResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/user"
@@ -213,6 +216,7 @@ func (s *user) CreateUserRaw(ctx context.Context, request []byte) (*operations.C
 
 // CreateUsersWithListInput - Creates list of users with given input array
 // Creates list of users with given input array
+
 func (s *user) CreateUsersWithListInput(ctx context.Context, request []shared.User) (*operations.CreateUsersWithListInputResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/user/createWithList"
@@ -273,6 +277,7 @@ func (s *user) CreateUsersWithListInput(ctx context.Context, request []shared.Us
 
 // DeleteUser - Delete user
 // This can only be done by the logged in user.
+
 func (s *user) DeleteUser(ctx context.Context, request operations.DeleteUserRequest) (*operations.DeleteUserResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/user/{username}", request, nil)
@@ -313,6 +318,7 @@ func (s *user) DeleteUser(ctx context.Context, request operations.DeleteUserRequ
 }
 
 // GetUserByName - Get user by user name
+
 func (s *user) GetUserByName(ctx context.Context, request operations.GetUserByNameRequest) (*operations.GetUserByNameResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/user/{username}", request, nil)
@@ -370,6 +376,7 @@ func (s *user) GetUserByName(ctx context.Context, request operations.GetUserByNa
 }
 
 // LoginUser - Logs user into the system
+
 func (s *user) LoginUser(ctx context.Context, request operations.LoginUserRequest) (*operations.LoginUserResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/user/login"
@@ -430,6 +437,7 @@ func (s *user) LoginUser(ctx context.Context, request operations.LoginUserReques
 }
 
 // LogoutUser - Logs out current logged in user session
+
 func (s *user) LogoutUser(ctx context.Context) (*operations.LogoutUserResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/user/logout"
@@ -466,6 +474,7 @@ func (s *user) LogoutUser(ctx context.Context) (*operations.LogoutUserResponse, 
 
 // UpdateUserForm - Update user
 // This can only be done by the logged in user.
+
 func (s *user) UpdateUserForm(ctx context.Context, request operations.UpdateUserFormRequest) (*operations.UpdateUserFormResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/user/{username}", request, nil)
@@ -512,6 +521,7 @@ func (s *user) UpdateUserForm(ctx context.Context, request operations.UpdateUser
 
 // UpdateUserJSON - Update user
 // This can only be done by the logged in user.
+
 func (s *user) UpdateUserJSON(ctx context.Context, request operations.UpdateUserJSONRequest) (*operations.UpdateUserJSONResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/user/{username}", request, nil)
@@ -558,6 +568,7 @@ func (s *user) UpdateUserJSON(ctx context.Context, request operations.UpdateUser
 
 // UpdateUserRaw - Update user
 // This can only be done by the logged in user.
+
 func (s *user) UpdateUserRaw(ctx context.Context, request operations.UpdateUserRawRequest) (*operations.UpdateUserRawResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/user/{username}", request, nil)

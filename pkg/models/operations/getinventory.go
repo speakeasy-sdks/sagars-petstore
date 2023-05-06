@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+type GetInventorySecurity struct {
+	APIKey string `security:"scheme,type=apiKey,subtype=header,name=api_key"`
+}
+
 type GetInventoryResponse struct {
 	ContentType string
 	StatusCode  int

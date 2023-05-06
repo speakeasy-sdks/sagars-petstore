@@ -61,13 +61,16 @@ import(
 	"context"
 	"log"
 	"petstore"
+	"petstore/pkg/models/operations"
 )
 
 func main() {
     s := sdk.New()
 
     ctx := context.Background()
-    res, err := s.Store.GetInventory(ctx)
+    res, err := s.Store.GetInventory(ctx, operations.GetInventorySecurity{
+        APIKey: "YOUR_API_KEY_HERE",
+    })
     if err != nil {
         log.Fatal(err)
     }

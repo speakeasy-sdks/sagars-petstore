@@ -80,7 +80,7 @@ func (s *store) DeleteOrder(ctx context.Context, request operations.DeleteOrderR
 // GetInventory - Returns pet inventories by status
 // Returns a map of status codes to quantities
 
-func (s *store) GetInventory(ctx context.Context) (*operations.GetInventoryResponse, error) {
+func (s *store) GetInventory(ctx context.Context, security operations.GetInventorySecurity) (*operations.GetInventoryResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/store/inventory"
 
@@ -89,7 +89,7 @@ func (s *store) GetInventory(ctx context.Context) (*operations.GetInventoryRespo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := utils.ConfigureSecurityClient(s.defaultClient, security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

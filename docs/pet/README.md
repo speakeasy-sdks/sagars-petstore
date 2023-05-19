@@ -52,7 +52,7 @@ func main() {
         PhotoUrls: []string{
             "ipsam",
         },
-        Status: shared.PetStatusEnumSold.ToPointer(),
+        Status: shared.PetStatusSold.ToPointer(),
         Tags: []shared.Tag{
             shared.Tag{
                 ID: sdk.Int64(778157),
@@ -116,7 +116,7 @@ func main() {
             "qui",
             "impedit",
         },
-        Status: shared.PetStatusEnumSold.ToPointer(),
+        Status: shared.PetStatusSold.ToPointer(),
         Tags: []shared.Tag{
             shared.Tag{
                 ID: sdk.Int64(216550),
@@ -231,7 +231,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Pet.FindPetsByStatus(ctx, operations.FindPetsByStatusRequest{
-        Status: operations.FindPetsByStatusStatusEnumPending.ToPointer(),
+        Status: operations.FindPetsByStatusStatusPending.ToPointer(),
     }, operations.FindPetsByStatusSecurity{
         PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
     })
@@ -388,7 +388,7 @@ func main() {
             "explicabo",
             "nobis",
         },
-        Status: shared.PetStatusEnumAvailable.ToPointer(),
+        Status: shared.PetStatusAvailable.ToPointer(),
         Tags: []shared.Tag{
             shared.Tag{
                 ID: sdk.Int64(363711),
@@ -448,7 +448,7 @@ func main() {
             "molestiae",
             "velit",
         },
-        Status: shared.PetStatusEnumPending.ToPointer(),
+        Status: shared.PetStatusPending.ToPointer(),
         Tags: []shared.Tag{
             shared.Tag{
                 ID: sdk.Int64(338007),

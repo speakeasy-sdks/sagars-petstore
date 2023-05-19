@@ -7,20 +7,20 @@ import (
 	"fmt"
 )
 
-// PetStatusEnum - pet status in the store
-type PetStatusEnum string
+// PetStatus - pet status in the store
+type PetStatus string
 
 const (
-	PetStatusEnumAvailable PetStatusEnum = "available"
-	PetStatusEnumPending   PetStatusEnum = "pending"
-	PetStatusEnumSold      PetStatusEnum = "sold"
+	PetStatusAvailable PetStatus = "available"
+	PetStatusPending   PetStatus = "pending"
+	PetStatusSold      PetStatus = "sold"
 )
 
-func (e PetStatusEnum) ToPointer() *PetStatusEnum {
+func (e PetStatus) ToPointer() *PetStatus {
 	return &e
 }
 
-func (e *PetStatusEnum) UnmarshalJSON(data []byte) error {
+func (e *PetStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -31,10 +31,10 @@ func (e *PetStatusEnum) UnmarshalJSON(data []byte) error {
 	case "pending":
 		fallthrough
 	case "sold":
-		*e = PetStatusEnum(v)
+		*e = PetStatus(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for PetStatusEnum: %v", v)
+		return fmt.Errorf("invalid value for PetStatus: %v", v)
 	}
 }
 
@@ -45,6 +45,6 @@ type Pet struct {
 	Name      string    `json:"name" form:"name=name"`
 	PhotoUrls []string  `json:"photoUrls" form:"name=photoUrls"`
 	// pet status in the store
-	Status *PetStatusEnum `json:"status,omitempty" form:"name=status"`
-	Tags   []Tag          `json:"tags,omitempty" form:"name=tags,json"`
+	Status *PetStatus `json:"status,omitempty" form:"name=status"`
+	Tags   []Tag      `json:"tags,omitempty" form:"name=tags,json"`
 }

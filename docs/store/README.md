@@ -141,7 +141,7 @@ func main() {
         PetID: sdk.Int64(198772),
         Quantity: sdk.Int(7),
         ShipDate: types.MustTimeFromString("2022-11-26T13:23:33.410Z"),
-        Status: shared.OrderStatusEnumApproved.ToPointer(),
+        Status: shared.OrderStatusApproved.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)
@@ -180,7 +180,7 @@ func main() {
         PetID: sdk.Int64(198772),
         Quantity: sdk.Int(7),
         ShipDate: types.MustTimeFromString("2021-04-29T07:12:18.684Z"),
-        Status: shared.OrderStatusEnumApproved.ToPointer(),
+        Status: shared.OrderStatusApproved.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)

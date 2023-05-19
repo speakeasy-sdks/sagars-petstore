@@ -37,7 +37,7 @@ func main() {
             "distinctio",
             "quibusdam",
         },
-        Status: shared.PetStatusEnumPending.ToPointer(),
+        Status: shared.PetStatusPending.ToPointer(),
         Tags: []shared.Tag{
             shared.Tag{
                 ID: sdk.Int64(544883),

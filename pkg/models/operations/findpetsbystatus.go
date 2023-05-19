@@ -13,20 +13,20 @@ type FindPetsByStatusSecurity struct {
 	PetstoreAuth string `security:"scheme,type=oauth2,name=Authorization"`
 }
 
-// FindPetsByStatusStatusEnum - Status values that need to be considered for filter
-type FindPetsByStatusStatusEnum string
+// FindPetsByStatusStatus - Status values that need to be considered for filter
+type FindPetsByStatusStatus string
 
 const (
-	FindPetsByStatusStatusEnumAvailable FindPetsByStatusStatusEnum = "available"
-	FindPetsByStatusStatusEnumPending   FindPetsByStatusStatusEnum = "pending"
-	FindPetsByStatusStatusEnumSold      FindPetsByStatusStatusEnum = "sold"
+	FindPetsByStatusStatusAvailable FindPetsByStatusStatus = "available"
+	FindPetsByStatusStatusPending   FindPetsByStatusStatus = "pending"
+	FindPetsByStatusStatusSold      FindPetsByStatusStatus = "sold"
 )
 
-func (e FindPetsByStatusStatusEnum) ToPointer() *FindPetsByStatusStatusEnum {
+func (e FindPetsByStatusStatus) ToPointer() *FindPetsByStatusStatus {
 	return &e
 }
 
-func (e *FindPetsByStatusStatusEnum) UnmarshalJSON(data []byte) error {
+func (e *FindPetsByStatusStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -37,16 +37,16 @@ func (e *FindPetsByStatusStatusEnum) UnmarshalJSON(data []byte) error {
 	case "pending":
 		fallthrough
 	case "sold":
-		*e = FindPetsByStatusStatusEnum(v)
+		*e = FindPetsByStatusStatus(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for FindPetsByStatusStatusEnum: %v", v)
+		return fmt.Errorf("invalid value for FindPetsByStatusStatus: %v", v)
 	}
 }
 
 type FindPetsByStatusRequest struct {
 	// Status values that need to be considered for filter
-	Status *FindPetsByStatusStatusEnum `queryParam:"style=form,explode=true,name=status"`
+	Status *FindPetsByStatusStatus `queryParam:"style=form,explode=true,name=status"`
 }
 
 type FindPetsByStatusResponse struct {

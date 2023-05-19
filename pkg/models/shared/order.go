@@ -8,20 +8,20 @@ import (
 	"time"
 )
 
-// OrderStatusEnum - Order Status
-type OrderStatusEnum string
+// OrderStatus - Order Status
+type OrderStatus string
 
 const (
-	OrderStatusEnumPlaced    OrderStatusEnum = "placed"
-	OrderStatusEnumApproved  OrderStatusEnum = "approved"
-	OrderStatusEnumDelivered OrderStatusEnum = "delivered"
+	OrderStatusPlaced    OrderStatus = "placed"
+	OrderStatusApproved  OrderStatus = "approved"
+	OrderStatusDelivered OrderStatus = "delivered"
 )
 
-func (e OrderStatusEnum) ToPointer() *OrderStatusEnum {
+func (e OrderStatus) ToPointer() *OrderStatus {
 	return &e
 }
 
-func (e *OrderStatusEnum) UnmarshalJSON(data []byte) error {
+func (e *OrderStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -32,10 +32,10 @@ func (e *OrderStatusEnum) UnmarshalJSON(data []byte) error {
 	case "approved":
 		fallthrough
 	case "delivered":
-		*e = OrderStatusEnum(v)
+		*e = OrderStatus(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for OrderStatusEnum: %v", v)
+		return fmt.Errorf("invalid value for OrderStatus: %v", v)
 	}
 }
 
@@ -46,5 +46,5 @@ type Order struct {
 	Quantity *int       `json:"quantity,omitempty" form:"name=quantity"`
 	ShipDate *time.Time `json:"shipDate,omitempty" form:"name=shipDate"`
 	// Order Status
-	Status *OrderStatusEnum `json:"status,omitempty" form:"name=status"`
+	Status *OrderStatus `json:"status,omitempty" form:"name=status"`
 }

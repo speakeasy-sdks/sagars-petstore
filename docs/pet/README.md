@@ -72,7 +72,7 @@ func main() {
             },
         },
     }, operations.AddPetFormSecurity{
-        PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
+        PetstoreAuth: "",
     })
     if err != nil {
         log.Fatal(err)
@@ -128,7 +128,7 @@ func main() {
             },
         },
     }, operations.AddPetJSONSecurity{
-        PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
+        PetstoreAuth: "",
     })
     if err != nil {
         log.Fatal(err)
@@ -162,7 +162,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Pet.AddPetRaw(ctx, []byte("saepe"), operations.AddPetRawSecurity{
-        PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
+        PetstoreAuth: "",
     })
     if err != nil {
         log.Fatal(err)
@@ -198,7 +198,7 @@ func main() {
         APIKey: sdk.String("fuga"),
         PetID: 449950,
     }, operations.DeletePetSecurity{
-        PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
+        PetstoreAuth: "",
     })
     if err != nil {
         log.Fatal(err)
@@ -233,7 +233,7 @@ func main() {
     res, err := s.Pet.FindPetsByStatus(ctx, operations.FindPetsByStatusRequest{
         Status: operations.FindPetsByStatusStatusPending.ToPointer(),
     }, operations.FindPetsByStatusSecurity{
-        PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
+        PetstoreAuth: "",
     })
     if err != nil {
         log.Fatal(err)
@@ -272,7 +272,7 @@ func main() {
             "quidem",
         },
     }, operations.FindPetsByTagsSecurity{
-        PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
+        PetstoreAuth: "",
     })
     if err != nil {
         log.Fatal(err)
@@ -307,7 +307,7 @@ func main() {
     res, err := s.Pet.GetPetByID(ctx, operations.GetPetByIDRequest{
         PetID: 99280,
     }, operations.GetPetByIDSecurity{
-        APIKey: sdk.String("YOUR_API_KEY_HERE"),
+        APIKey: sdk.String(""),
     })
     if err != nil {
         log.Fatal(err)
@@ -344,7 +344,7 @@ func main() {
         PetID: 170909,
         Status: sdk.String("dolorem"),
     }, operations.UpdatePetWithFormSecurity{
-        PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
+        PetstoreAuth: "",
     })
     if err != nil {
         log.Fatal(err)
@@ -404,7 +404,7 @@ func main() {
             },
         },
     }, operations.UpdatePetFormSecurity{
-        PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
+        PetstoreAuth: "",
     })
     if err != nil {
         log.Fatal(err)
@@ -456,7 +456,7 @@ func main() {
             },
         },
     }, operations.UpdatePetJSONSecurity{
-        PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
+        PetstoreAuth: "",
     })
     if err != nil {
         log.Fatal(err)
@@ -490,7 +490,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Pet.UpdatePetRaw(ctx, []byte("quo"), operations.UpdatePetRawSecurity{
-        PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
+        PetstoreAuth: "",
     })
     if err != nil {
         log.Fatal(err)
@@ -527,7 +527,7 @@ func main() {
         AdditionalMetadata: sdk.String("tenetur"),
         PetID: 368725,
     }, operations.UploadFileSecurity{
-        PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
+        PetstoreAuth: "",
     })
     if err != nil {
         log.Fatal(err)

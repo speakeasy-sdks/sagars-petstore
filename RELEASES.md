@@ -47,3 +47,11 @@ Based on:
 - Speakeasy CLI 1.40.2 (2.34.2) https://github.com/speakeasy-api/speakeasy
 ### Releases
 - [Go v1.5.0] https://github.com/speakeasy-sdks/sagars-petstore/releases/tag/v1.5.0 - .
+
+## 2023-06-08 01:45:03
+### Changes
+Based on:
+- OpenAPI Doc 1.0.17 https://prod.speakeasyapi.dev/v1/apis/petstore/version/1.0.0/schema/download
+- Speakeasy CLI 1.45.0 (2.37.0) https://github.com/speakeasy-api/speakeasy
+### Releases
+- [Go v1.6.0] https://github.com/speakeasy-sdks/sagars-petstore/releases/tag/v1.6.0 - .

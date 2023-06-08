@@ -46,7 +46,7 @@ func main() {
             },
         },
     }, operations.AddPetFormSecurity{
-        PetstoreAuth: "Bearer YOUR_ACCESS_TOKEN_HERE",
+        PetstoreAuth: "",
     })
     if err != nil {
         log.Fatal(err)

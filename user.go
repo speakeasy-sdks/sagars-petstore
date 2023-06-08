@@ -16,29 +16,19 @@ import (
 
 // user - Operations about user
 type user struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
-	language       string
-	sdkVersion     string
-	genVersion     string
+	sdkConfiguration sdkConfiguration
 }
 
-func newUser(defaultClient, securityClient HTTPClient, serverURL, language, sdkVersion, genVersion string) *user {
+func newUser(sdkConfig sdkConfiguration) *user {
 	return &user{
-		defaultClient:  defaultClient,
-		securityClient: securityClient,
-		serverURL:      serverURL,
-		language:       language,
-		sdkVersion:     sdkVersion,
-		genVersion:     genVersion,
+		sdkConfiguration: sdkConfig,
 	}
 }
 
 // CreateUserForm - Create user
 // This can only be done by the logged in user.
 func (s *user) CreateUserForm(ctx context.Context, request shared.User) (*operations.CreateUserFormResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/user"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "form")
@@ -51,11 +41,11 @@ func (s *user) CreateUserForm(ctx context.Context, request shared.User) (*operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/xml;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -100,7 +90,7 @@ func (s *user) CreateUserForm(ctx context.Context, request shared.User) (*operat
 // CreateUserJSON - Create user
 // This can only be done by the logged in user.
 func (s *user) CreateUserJSON(ctx context.Context, request shared.User) (*operations.CreateUserJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/user"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -113,11 +103,11 @@ func (s *user) CreateUserJSON(ctx context.Context, request shared.User) (*operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/xml;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -162,7 +152,7 @@ func (s *user) CreateUserJSON(ctx context.Context, request shared.User) (*operat
 // CreateUserRaw - Create user
 // This can only be done by the logged in user.
 func (s *user) CreateUserRaw(ctx context.Context, request []byte) (*operations.CreateUserRawResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/user"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "raw")
@@ -175,11 +165,11 @@ func (s *user) CreateUserRaw(ctx context.Context, request []byte) (*operations.C
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/xml;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -224,7 +214,7 @@ func (s *user) CreateUserRaw(ctx context.Context, request []byte) (*operations.C
 // CreateUsersWithListInput - Creates list of users with given input array
 // Creates list of users with given input array
 func (s *user) CreateUsersWithListInput(ctx context.Context, request []shared.User) (*operations.CreateUsersWithListInputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/user/createWithList"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -237,11 +227,11 @@ func (s *user) CreateUsersWithListInput(ctx context.Context, request []shared.Us
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/xml;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -287,7 +277,7 @@ func (s *user) CreateUsersWithListInput(ctx context.Context, request []shared.Us
 // DeleteUser - Delete user
 // This can only be done by the logged in user.
 func (s *user) DeleteUser(ctx context.Context, request operations.DeleteUserRequest) (*operations.DeleteUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/user/{username}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -298,9 +288,9 @@ func (s *user) DeleteUser(ctx context.Context, request operations.DeleteUserRequ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -335,7 +325,7 @@ func (s *user) DeleteUser(ctx context.Context, request operations.DeleteUserRequ
 
 // GetUserByName - Get user by user name
 func (s *user) GetUserByName(ctx context.Context, request operations.GetUserByNameRequest) (*operations.GetUserByNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/user/{username}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -346,9 +336,9 @@ func (s *user) GetUserByName(ctx context.Context, request operations.GetUserByNa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/xml;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -395,7 +385,7 @@ func (s *user) GetUserByName(ctx context.Context, request operations.GetUserByNa
 
 // LoginUser - Logs user into the system
 func (s *user) LoginUser(ctx context.Context, request operations.LoginUserRequest) (*operations.LoginUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/user/login"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -403,13 +393,13 @@ func (s *user) LoginUser(ctx context.Context, request operations.LoginUserReques
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/xml;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -453,7 +443,7 @@ func (s *user) LoginUser(ctx context.Context, request operations.LoginUserReques
 
 // LogoutUser - Logs out current logged in user session
 func (s *user) LogoutUser(ctx context.Context) (*operations.LogoutUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/user/logout"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -461,9 +451,9 @@ func (s *user) LogoutUser(ctx context.Context) (*operations.LogoutUserResponse, 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -497,7 +487,7 @@ func (s *user) LogoutUser(ctx context.Context) (*operations.LogoutUserResponse, 
 // UpdateUserForm - Update user
 // This can only be done by the logged in user.
 func (s *user) UpdateUserForm(ctx context.Context, request operations.UpdateUserFormRequest) (*operations.UpdateUserFormResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/user/{username}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -513,11 +503,11 @@ func (s *user) UpdateUserForm(ctx context.Context, request operations.UpdateUser
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -551,7 +541,7 @@ func (s *user) UpdateUserForm(ctx context.Context, request operations.UpdateUser
 // UpdateUserJSON - Update user
 // This can only be done by the logged in user.
 func (s *user) UpdateUserJSON(ctx context.Context, request operations.UpdateUserJSONRequest) (*operations.UpdateUserJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/user/{username}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -567,11 +557,11 @@ func (s *user) UpdateUserJSON(ctx context.Context, request operations.UpdateUser
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -605,7 +595,7 @@ func (s *user) UpdateUserJSON(ctx context.Context, request operations.UpdateUser
 // UpdateUserRaw - Update user
 // This can only be done by the logged in user.
 func (s *user) UpdateUserRaw(ctx context.Context, request operations.UpdateUserRawRequest) (*operations.UpdateUserRawResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/user/{username}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -621,11 +611,11 @@ func (s *user) UpdateUserRaw(ctx context.Context, request operations.UpdateUserR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -17,29 +17,19 @@ import (
 // store - Access to Petstore orders
 // http://swagger.io - Find out more about our store
 type store struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
-	language       string
-	sdkVersion     string
-	genVersion     string
+	sdkConfiguration sdkConfiguration
 }
 
-func newStore(defaultClient, securityClient HTTPClient, serverURL, language, sdkVersion, genVersion string) *store {
+func newStore(sdkConfig sdkConfiguration) *store {
 	return &store{
-		defaultClient:  defaultClient,
-		securityClient: securityClient,
-		serverURL:      serverURL,
-		language:       language,
-		sdkVersion:     sdkVersion,
-		genVersion:     genVersion,
+		sdkConfiguration: sdkConfig,
 	}
 }
 
 // DeleteOrder - Delete purchase order by ID
 // For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
 func (s *store) DeleteOrder(ctx context.Context, request operations.DeleteOrderRequest) (*operations.DeleteOrderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/store/order/{orderId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -50,9 +40,9 @@ func (s *store) DeleteOrder(ctx context.Context, request operations.DeleteOrderR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -88,7 +78,7 @@ func (s *store) DeleteOrder(ctx context.Context, request operations.DeleteOrderR
 // GetInventory - Returns pet inventories by status
 // Returns a map of status codes to quantities
 func (s *store) GetInventory(ctx context.Context, security operations.GetInventorySecurity) (*operations.GetInventoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/store/inventory"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -96,9 +86,9 @@ func (s *store) GetInventory(ctx context.Context, security operations.GetInvento
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := utils.ConfigureSecurityClient(s.defaultClient, security)
+	client := utils.ConfigureSecurityClient(s.sdkConfiguration.DefaultClient, security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -141,7 +131,7 @@ func (s *store) GetInventory(ctx context.Context, security operations.GetInvento
 // GetOrderByID - Find purchase order by ID
 // For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions.
 func (s *store) GetOrderByID(ctx context.Context, request operations.GetOrderByIDRequest) (*operations.GetOrderByIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/store/order/{orderId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -152,9 +142,9 @@ func (s *store) GetOrderByID(ctx context.Context, request operations.GetOrderByI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/xml;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -202,7 +192,7 @@ func (s *store) GetOrderByID(ctx context.Context, request operations.GetOrderByI
 // PlaceOrderForm - Place an order for a pet
 // Place a new order in the store
 func (s *store) PlaceOrderForm(ctx context.Context, request shared.Order) (*operations.PlaceOrderFormResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/store/order"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "form")
@@ -215,11 +205,11 @@ func (s *store) PlaceOrderForm(ctx context.Context, request shared.Order) (*oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -263,7 +253,7 @@ func (s *store) PlaceOrderForm(ctx context.Context, request shared.Order) (*oper
 // PlaceOrderJSON - Place an order for a pet
 // Place a new order in the store
 func (s *store) PlaceOrderJSON(ctx context.Context, request shared.Order) (*operations.PlaceOrderJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/store/order"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -276,11 +266,11 @@ func (s *store) PlaceOrderJSON(ctx context.Context, request shared.Order) (*oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -324,7 +314,7 @@ func (s *store) PlaceOrderJSON(ctx context.Context, request shared.Order) (*oper
 // PlaceOrderRaw - Place an order for a pet
 // Place a new order in the store
 func (s *store) PlaceOrderRaw(ctx context.Context, request []byte) (*operations.PlaceOrderRawResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/store/order"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "raw")
@@ -337,11 +327,11 @@ func (s *store) PlaceOrderRaw(ctx context.Context, request []byte) (*operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

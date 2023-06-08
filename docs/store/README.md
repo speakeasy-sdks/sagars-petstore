@@ -69,7 +69,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Store.GetInventory(ctx, operations.GetInventorySecurity{
-        APIKey: "YOUR_API_KEY_HERE",
+        APIKey: "",
     })
     if err != nil {
         log.Fatal(err)

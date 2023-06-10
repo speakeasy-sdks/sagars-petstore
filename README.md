@@ -74,43 +74,43 @@ func main() {
 ## Available Resources and Operations
 
 
-### [Pet](docs/pet/README.md)
+### [Pet](docs/sdks/pet/README.md)
 
-* [AddPetForm](docs/pet/README.md#addpetform) - Add a new pet to the store
-* [AddPetJSON](docs/pet/README.md#addpetjson) - Add a new pet to the store
-* [AddPetRaw](docs/pet/README.md#addpetraw) - Add a new pet to the store
-* [DeletePet](docs/pet/README.md#deletepet) - Deletes a pet
-* [FindPetsByStatus](docs/pet/README.md#findpetsbystatus) - Finds Pets by status
-* [FindPetsByTags](docs/pet/README.md#findpetsbytags) - Finds Pets by tags
-* [GetPetByID](docs/pet/README.md#getpetbyid) - Find pet by ID
-* [UpdatePetWithForm](docs/pet/README.md#updatepetwithform) - Updates a pet in the store with form data
-* [UpdatePetForm](docs/pet/README.md#updatepetform) - Update an existing pet
-* [UpdatePetJSON](docs/pet/README.md#updatepetjson) - Update an existing pet
-* [UpdatePetRaw](docs/pet/README.md#updatepetraw) - Update an existing pet
-* [UploadFile](docs/pet/README.md#uploadfile) - uploads an image
+* [AddPetForm](docs/sdks/pet/README.md#addpetform) - Add a new pet to the store
+* [AddPetJSON](docs/sdks/pet/README.md#addpetjson) - Add a new pet to the store
+* [AddPetRaw](docs/sdks/pet/README.md#addpetraw) - Add a new pet to the store
+* [DeletePet](docs/sdks/pet/README.md#deletepet) - Deletes a pet
+* [FindPetsByStatus](docs/sdks/pet/README.md#findpetsbystatus) - Finds Pets by status
+* [FindPetsByTags](docs/sdks/pet/README.md#findpetsbytags) - Finds Pets by tags
+* [GetPetByID](docs/sdks/pet/README.md#getpetbyid) - Find pet by ID
+* [UpdatePetWithForm](docs/sdks/pet/README.md#updatepetwithform) - Updates a pet in the store with form data
+* [UpdatePetForm](docs/sdks/pet/README.md#updatepetform) - Update an existing pet
+* [UpdatePetJSON](docs/sdks/pet/README.md#updatepetjson) - Update an existing pet
+* [UpdatePetRaw](docs/sdks/pet/README.md#updatepetraw) - Update an existing pet
+* [UploadFile](docs/sdks/pet/README.md#uploadfile) - uploads an image
 
-### [Store](docs/store/README.md)
+### [Store](docs/sdks/store/README.md)
 
-* [DeleteOrder](docs/store/README.md#deleteorder) - Delete purchase order by ID
-* [GetInventory](docs/store/README.md#getinventory) - Returns pet inventories by status
-* [GetOrderByID](docs/store/README.md#getorderbyid) - Find purchase order by ID
-* [PlaceOrderForm](docs/store/README.md#placeorderform) - Place an order for a pet
-* [PlaceOrderJSON](docs/store/README.md#placeorderjson) - Place an order for a pet
-* [PlaceOrderRaw](docs/store/README.md#placeorderraw) - Place an order for a pet
+* [DeleteOrder](docs/sdks/store/README.md#deleteorder) - Delete purchase order by ID
+* [GetInventory](docs/sdks/store/README.md#getinventory) - Returns pet inventories by status
+* [GetOrderByID](docs/sdks/store/README.md#getorderbyid) - Find purchase order by ID
+* [PlaceOrderForm](docs/sdks/store/README.md#placeorderform) - Place an order for a pet
+* [PlaceOrderJSON](docs/sdks/store/README.md#placeorderjson) - Place an order for a pet
+* [PlaceOrderRaw](docs/sdks/store/README.md#placeorderraw) - Place an order for a pet
 
-### [User](docs/user/README.md)
+### [User](docs/sdks/user/README.md)
 
-* [CreateUserForm](docs/user/README.md#createuserform) - Create user
-* [CreateUserJSON](docs/user/README.md#createuserjson) - Create user
-* [CreateUserRaw](docs/user/README.md#createuserraw) - Create user
-* [CreateUsersWithListInput](docs/user/README.md#createuserswithlistinput) - Creates list of users with given input array
-* [DeleteUser](docs/user/README.md#deleteuser) - Delete user
-* [GetUserByName](docs/user/README.md#getuserbyname) - Get user by user name
-* [LoginUser](docs/user/README.md#loginuser) - Logs user into the system
-* [LogoutUser](docs/user/README.md#logoutuser) - Logs out current logged in user session
-* [UpdateUserForm](docs/user/README.md#updateuserform) - Update user
-* [UpdateUserJSON](docs/user/README.md#updateuserjson) - Update user
-* [UpdateUserRaw](docs/user/README.md#updateuserraw) - Update user
+* [CreateUserForm](docs/sdks/user/README.md#createuserform) - Create user
+* [CreateUserJSON](docs/sdks/user/README.md#createuserjson) - Create user
+* [CreateUserRaw](docs/sdks/user/README.md#createuserraw) - Create user
+* [CreateUsersWithListInput](docs/sdks/user/README.md#createuserswithlistinput) - Creates list of users with given input array
+* [DeleteUser](docs/sdks/user/README.md#deleteuser) - Delete user
+* [GetUserByName](docs/sdks/user/README.md#getuserbyname) - Get user by user name
+* [LoginUser](docs/sdks/user/README.md#loginuser) - Logs user into the system
+* [LogoutUser](docs/sdks/user/README.md#logoutuser) - Logs out current logged in user session
+* [UpdateUserForm](docs/sdks/user/README.md#updateuserform) - Update user
+* [UpdateUserJSON](docs/sdks/user/README.md#updateuserjson) - Update user
+* [UpdateUserRaw](docs/sdks/user/README.md#updateuserraw) - Update user
 <!-- End SDK Available Operations -->
 
 ### Maturity
